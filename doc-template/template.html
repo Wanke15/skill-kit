@@ -30,6 +30,12 @@
             line-height: 1.8;
             color: var(--text-color);
             background-color: var(--bg-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         /* Header */
@@ -86,6 +92,38 @@
         nav a:hover {
             background: var(--primary-color);
             color: white;
+        }
+
+        /* Mobile Navigation Toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            margin: 0 auto;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            margin: 5px 0;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
         }
 
         /* Main Content */
@@ -468,31 +506,216 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            header {
+                padding: 50px 15px;
+            }
+
             header h1 {
                 font-size: 2rem;
             }
 
+            header p {
+                font-size: 1rem;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
             nav ul {
-                justify-content: flex-start;
-                overflow-x: auto;
-                flex-wrap: nowrap;
-                padding-bottom: 10px;
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 15px 0;
+                gap: 5px;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav a {
+                display: block;
+                text-align: center;
+                padding: 12px 16px;
+            }
+
+            main {
+                padding: 20px 15px;
             }
 
             section {
-                padding: 25px;
+                padding: 25px 20px;
+                border-radius: 12px;
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+                margin-bottom: 20px;
+                padding-bottom: 12px;
+            }
+
+            h3 {
+                font-size: 1.15rem;
+            }
+
+            h4 {
+                font-size: 1rem;
+            }
+
+            .highlight-box,
+            .info-box {
+                padding: 15px 18px;
+                margin: 15px 0;
             }
 
             .comparison-box {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .comparison-item {
+                padding: 20px;
             }
 
             .cards-grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
             }
 
             .toc ul {
                 column-count: 1;
+            }
+
+            .toc {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 10px 8px;
+            }
+
+            /* Step list mobile */
+            .step-list li {
+                padding-left: 55px;
+                min-height: 40px;
+                margin-bottom: 20px;
+            }
+
+            .step-list li::before {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+
+            .step-list li strong {
+                font-size: 1rem;
+            }
+
+            /* Timeline mobile */
+            .timeline {
+                padding-left: 25px;
+            }
+
+            .timeline::before {
+                left: 6px;
+            }
+
+            .timeline-item {
+                padding-left: 20px;
+                margin-bottom: 20px;
+            }
+
+            .timeline-item::before {
+                left: -22px;
+                width: 12px;
+                height: 12px;
+            }
+
+            /* Definition list mobile */
+            .definition-item {
+                padding: 15px;
+            }
+
+            .definition-item dt {
+                font-size: 1rem;
+            }
+
+            /* Code block mobile */
+            .code-block {
+                padding: 15px;
+                font-size: 0.8rem;
+            }
+
+            /* Method badge mobile */
+            .method-badge {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+                margin-right: 5px;
+                margin-bottom: 5px;
+            }
+
+            /* Figure container mobile */
+            .figure-container {
+                padding: 15px;
+                margin: 20px 0;
+            }
+
+            .figure-caption {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 20px 15px;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            h3 {
+                font-size: 1.05rem;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .step-list li {
+                padding-left: 45px;
+                min-height: 35px;
+            }
+
+            .step-list li::before {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
             }
         }
 
@@ -514,6 +737,11 @@
     </header>
 
     <nav>
+        <button class="nav-toggle" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('show')">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <ul>
             {{NAV_ITEMS}}
         </ul>
